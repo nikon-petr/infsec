@@ -1,10 +1,14 @@
 package app.controller;
 
+import app.model.CryptoMethodTester;
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.FileChooser;
 
@@ -18,13 +22,16 @@ public class RootController implements Initializable {
     private Label fileNameLabel;
 
     @FXML
+    private Button testButton;
+
+    @FXML
     private BarChart encodingChart;
 
     @FXML
     private BarChart decodingChart;
 
     @FXML
-    private void handleFileButtonAction(ActionEvent e){
+    private void handleFileButtonAction(ActionEvent e) {
 
         FileChooser fileChooser = new FileChooser();
 
@@ -42,13 +49,44 @@ public class RootController implements Initializable {
         }
     }
 
+    @FXML
+    private void handleTestButtonAction(ActionEvent e) {
+        File inputFile = new File(fileNameLabel.getText());
+        if (!inputFile.exists()) {
+            return;
+        }
+        CryptoMethodTester tester = new CryptoMethodTester();
+
+        testButton.setDisable(true);
+
+        Task<Void> codeTask = new Task<Void>() {
+            @Override
+            public Void call(){
+
+                tester.test(inputFile);
+                return null;
+            }
+        };
+        codeTask.setOnSucceeded(event -> {
+            encodingChart.getData().addAll(tester.getEserieses());
+            decodingChart.getData().addAll(tester.getDserieses());
+
+            testButton.setDisable(false);
+        });
+        new Thread(codeTask).start();
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        encodingChart.getYAxis().setLabel("Time");
+        encodingChart.getYAxis().setLabel("Time, ms");
         encodingChart.getXAxis().setLabel("Method");
 
-        decodingChart.getXAxis().setLabel("Time");
-        decodingChart.getYAxis().setLabel("Method");
+        encodingChart.setAnimated(false);
+
+        decodingChart.getYAxis().setLabel("Time, ms");
+        decodingChart.getXAxis().setLabel("Method");
+
+        decodingChart.setAnimated(false);
     }
 }
