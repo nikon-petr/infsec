@@ -1,19 +1,27 @@
 package app.controller;
 
+import javafx.beans.binding.BooleanBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 
-public class RootController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class RootController implements Initializable{
 
     private static final String EMPTY_STRING = "";
 
     @FXML
-    private Label generationStatusLabel, importPrivateKeyStatusLabel, importPublicKeyStatusLabel;
+    private Label generationStatusLabel, importPrivateKeyStatusLabel, importPublicKeyStatusLabel, filePathLabel;
 
     @FXML
     private VBox generateGroup, importGroup;
+
+    @FXML
+    private ChoiceBox modeChoiceBox;
 
     private String privateKey, publicKey;
 
@@ -52,5 +60,19 @@ public class RootController {
         generationStatusLabel.setText("");
         importPrivateKeyStatusLabel.setText("");
         importPublicKeyStatusLabel.setText("");
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        modeChoiceBox.getItems().addAll("Encode", "Decode");
+        modeChoiceBox.setValue("Encode");
+
+        BooleanBinding isKeyGenerated = generationStatusLabel.textProperty().isEmpty();
+        BooleanBinding isKeyImported = importPrivateKeyStatusLabel.textProperty().isEmpty()
+                .or(importPublicKeyStatusLabel.textProperty().isEmpty());
+        BooleanBinding isFileImported = filePathLabel.textProperty().isEmpty();
+
+        BooleanBinding isStartEnabled = isKeyGenerated.and(isKeyImported).or(isFileImported);
+
     }
 }
