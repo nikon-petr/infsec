@@ -6,7 +6,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,8 +22,13 @@ public class RootController implements Initializable{
     @FXML
     private VBox generateGroup, importGroup;
 
+    @FXML RadioButton generateKeysRadioButton, importKeysRadioButton;
+
     @FXML
     private ChoiceBox modeChoiceBox;
+
+    @FXML
+    private Button startButton;
 
     private String privateKey, publicKey;
 
@@ -43,8 +50,6 @@ public class RootController implements Initializable{
     @FXML
     private void onGenerateKeysRadioButton(ActionEvent e){
         clearInput();
-        generateGroup.setDisable(false);
-        importGroup.setDisable(true);
     }
 
     @FXML
@@ -52,8 +57,24 @@ public class RootController implements Initializable{
         privateKey = EMPTY_STRING;
         publicKey = EMPTY_STRING;
         clearInput();
-        generateGroup.setDisable(true);
-        importGroup.setDisable(false);
+    }
+
+    @FXML
+    private void onOpenFileAction(ActionEvent e){
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extensionFilter = new FileChooser.ExtensionFilter("Text files (*txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extensionFilter);
+
+        File userDirectory = new File(System.getProperty("user.home"));
+
+        fileChooser.setTitle("Text file");
+        fileChooser.setInitialDirectory(userDirectory);
+        File selectedDirectory = fileChooser.showOpenDialog(null);
+
+        if (selectedDirectory != null) {
+            filePathLabel.setText(selectedDirectory.toString());
+        }
     }
 
     private void clearInput(){
@@ -67,12 +88,17 @@ public class RootController implements Initializable{
         modeChoiceBox.getItems().addAll("Encode", "Decode");
         modeChoiceBox.setValue("Encode");
 
-        BooleanBinding isKeyGenerated = generationStatusLabel.textProperty().isEmpty();
-        BooleanBinding isKeyImported = importPrivateKeyStatusLabel.textProperty().isEmpty()
-                .or(importPublicKeyStatusLabel.textProperty().isEmpty());
-        BooleanBinding isFileImported = filePathLabel.textProperty().isEmpty();
+        BooleanBinding isKeyGenerated = generationStatusLabel.textProperty().isNotEmpty();
+        BooleanBinding isKeyImported = importPrivateKeyStatusLabel.textProperty().isNotEmpty()
+                .and(importPublicKeyStatusLabel.textProperty().isNotEmpty());
+        BooleanBinding isFileImported = filePathLabel.textProperty().isNotEmpty();
 
-        BooleanBinding isStartEnabled = isKeyGenerated.and(isKeyImported).or(isFileImported);
+        BooleanBinding isStartEnabled = isKeyGenerated.and(isFileImported)
+                .or(isKeyImported.and(isFileImported));
 
+        startButton.disableProperty().bind(isStartEnabled.not());
+
+        generateGroup.disableProperty().bind(importKeysRadioButton.selectedProperty());
+        importGroup.disableProperty().bind(generateKeysRadioButton.selectedProperty());
     }
 }

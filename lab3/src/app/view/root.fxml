@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.RootController">
+<GridPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.RootController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -66,7 +66,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </VBox.margin>
             </VBox>
-            <VBox fx:id="importGroup" disable="true" prefWidth="100.0" spacing="10.0" style="-fx-border-style: solid; -fx-border-color: #B8B8B8;" VBox.vgrow="NEVER">
+            <VBox fx:id="importGroup" prefWidth="100.0" spacing="10.0" style="-fx-border-style: solid; -fx-border-color: #B8B8B8;" VBox.vgrow="NEVER">
                <children>
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
@@ -101,14 +101,14 @@
                   <HBox prefHeight="100.0" prefWidth="200.0" />
                   <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
-                        <Button fx:id="openFileButton" mnemonicParsing="false" text="Open File" />
+                        <Button fx:id="openFileButton" mnemonicParsing="false" onAction="#onOpenFileAction" text="Open File" />
                         <Label fx:id="filePathLabel" />
                      </children>
                   </HBox>
                   <HBox prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
                         <ChoiceBox fx:id="modeChoiceBox" prefWidth="150.0" />
-                        <Button fx:id="startButton" disable="true" mnemonicParsing="false" text="Start" />
+                        <Button fx:id="startButton" mnemonicParsing="false" text="Start" />
                      </children>
                   </HBox>
                </children>
