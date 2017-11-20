@@ -156,10 +156,6 @@ public class RootController implements Initializable {
             filePathLabel.setText(selectedFile.toString());
             filePathLabel.setVisible(true);
             fileOpenFailLabel.setVisible(false);
-        } else {
-            filePathLabel.setText(EMPTY_STRING);
-            filePathLabel.setVisible(false);
-            fileOpenFailLabel.setVisible(true);
         }
     }
 
