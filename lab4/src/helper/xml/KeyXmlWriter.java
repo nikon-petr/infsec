@@ -19,8 +19,8 @@ import java.util.Map;
 public class KeyXmlWriter {
 
     private static final Map<KeyType, String> nodeNames;
-    static
-    {
+
+    static {
         nodeNames = new HashMap<>();
         nodeNames.put(KeyType.PUBLIC, "public-key");
         nodeNames.put(KeyType.PRIVATE, "private-key");

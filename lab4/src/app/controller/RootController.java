@@ -22,8 +22,10 @@ import org.xml.sax.SAXException;
 
 import java.io.File;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.security.*;
+import java.security.InvalidKeyException;
+import java.security.KeyPair;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 import java.util.ResourceBundle;
@@ -165,7 +167,7 @@ public class RootController implements Initializable {
         FileChooser fileChooser = FileSaver.get("Save Sign File to", inputFile.getName() + ".dsa");
         File signFile = fileChooser.showSaveDialog(null);
 
-        if(signFile != null){
+        if (signFile != null) {
             try {
                 DsaHelper.sign(inputFile, signFile, privateKey);
             } catch (InvalidKeyException e1) {
@@ -186,7 +188,7 @@ public class RootController implements Initializable {
         File inputFile = new File(filePathLabel.getText());
         File signFile = new File(loadSignPathLabel.getText());
 
-        if(inputFile != null && signFile != null){
+        if (inputFile != null && signFile != null) {
             boolean isVerified = false;
 
             try {

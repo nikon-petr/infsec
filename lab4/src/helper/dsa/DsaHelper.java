@@ -4,6 +4,7 @@ import java.io.*;
 import java.security.*;
 
 public class DsaHelper {
+
     public static KeyPair generateKeyPair(int keySize) {
         try {
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance("DSA", "SUN");
@@ -26,7 +27,7 @@ public class DsaHelper {
 
         dsa.initSign(privateKey);
 
-        try(
+        try (
                 InputStream is = new FileInputStream(file);
                 BufferedInputStream bin = new BufferedInputStream(is);
                 OutputStream os = new FileOutputStream(sign, false)

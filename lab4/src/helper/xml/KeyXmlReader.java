@@ -14,8 +14,10 @@ import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.*;
+import java.security.KeyFactory;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
@@ -24,9 +26,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class KeyXmlReader {
+
     private static final Map<KeyType, String> xsdUrl;
-    static
-    {
+
+    static {
         xsdUrl = new HashMap<>();
         xsdUrl.put(KeyType.PUBLIC, "lab4/src/helper/xml/publicKeyXmlScheme.xsd");
         xsdUrl.put(KeyType.PRIVATE, "lab4/src/helper/xml/privateKeyXmlScheme.xsd");

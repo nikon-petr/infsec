@@ -27,7 +27,8 @@
                 <RadioButton fx:id="generateKeysRadioButton" mnemonicParsing="false" onAction="#onGenerateKeysRadioButton" selected="true" text="Generate Keys">
                     <toggleGroup>
                         <ToggleGroup fx:id="keySource" />
-                    </toggleGroup></RadioButton>
+                    </toggleGroup>
+                </RadioButton>
                 <RadioButton fx:id="importKeysRadioButton" mnemonicParsing="false" onAction="#onImportKeysRadioButton" text="Import Keys" toggleGroup="$keySource" />
             </children>
             <GridPane.margin>
@@ -98,7 +99,8 @@
                                 <Label fx:id="importPublicKeyFailLabel" text="failure" textFill="#8e2a2a" visible="false">
                                     <font>
                                         <Font name="System Bold" size="13.0" />
-                                    </font></Label>
+                                    </font>
+                                </Label>
                             </children>
                         </HBox>
                     </children>
@@ -123,21 +125,21 @@
                                 </Label>
                             </children>
                         </HBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-                     <children>
-                        <Button fx:id="LoadSignButton" mnemonicParsing="false" onAction="#onLoadSignAction" text="Load Sign" />
-                        <Label fx:id="loadSignPathLabel" visible="false" />
-                        <Label fx:id="loadSignFailLabel" text="failure" textFill="#8e2a2a" visible="false">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </HBox>
+                        <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+                            <children>
+                                <Button fx:id="LoadSignButton" mnemonicParsing="false" onAction="#onLoadSignAction" text="Load Signature" />
+                                <Label fx:id="loadSignPathLabel" visible="false" />
+                                <Label fx:id="loadSignFailLabel" text="failure" textFill="#8e2a2a" visible="false">
+                                    <font>
+                                        <Font name="System Bold" size="13.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
                         <HBox prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                             <children>
                                 <Button fx:id="signFileButton" mnemonicParsing="false" onAction="#onSignFileAction" text="Sign File" />
-                                <Button fx:id="checkFileButton" mnemonicParsing="false" onAction="#onCheckFileAction" text="Check File" />
+                                <Button fx:id="checkFileButton" mnemonicParsing="false" onAction="#onCheckFileAction" text="Verify File" />
                                 <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onResetAction" text="Reset" />
                             </children>
                         </HBox>
@@ -146,6 +148,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </padding>
                 </VBox>
-            </children></VBox>
+            </children>
+        </VBox>
     </children>
 </GridPane>
