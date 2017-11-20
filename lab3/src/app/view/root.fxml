@@ -125,7 +125,7 @@
                   </HBox>
                   <HBox prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
-                        <Button fx:id="encryptButton" mnemonicParsing="false" onAction="#onEncryptAction" text="Encrypt" />
+                        <Button fx:id="signFileButton" mnemonicParsing="false" onAction="#onEncryptAction" text="Encrypt" />
                         <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#onDecryptAction" text="Decrypt" />
                         <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onResetAction" text="Reset" />
                      </children>
