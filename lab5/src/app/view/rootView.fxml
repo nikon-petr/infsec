@@ -7,12 +7,12 @@
   <tabs>
     <Tab closable="false" text="Encryption">
       <content>
-        <fx:include source="encryptorView.fxml" />
+        <fx:include source="hiderView.fxml" />
       </content>
     </Tab>
     <Tab closable="false" text="Decryption">
       <content>
-        <fx:include source="decryptorView.fxml" />
+        <fx:include source="revealerView.fxml" />
       </content>
     </Tab>
   </tabs>
