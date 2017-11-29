@@ -1,4 +1,4 @@
-package app.model;
+package app.viewmodel;
 
 import javafx.scene.image.Image;
 import javafx.util.StringConverter;

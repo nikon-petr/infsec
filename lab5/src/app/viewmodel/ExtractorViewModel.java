@@ -1,11 +1,11 @@
-package app.model;
+package app.viewmodel;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
-public class ExtractorModel {
+public class ExtractorViewModel {
 
     private Image placeholderImage;
 
@@ -13,7 +13,7 @@ public class ExtractorModel {
 
     private SimpleStringProperty passwordProperty;
 
-    public ExtractorModel(Image placeholderImage) {
+    public ExtractorViewModel(Image placeholderImage) {
         this.placeholderImage = placeholderImage;
         inputImageProperty = new SimpleObjectProperty<>();
         passwordProperty = new SimpleStringProperty();

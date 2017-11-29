@@ -1,4 +1,4 @@
-package app.model;
+package app.viewmodel;
 
 import app.data.Encryptor;
 import app.data.HashCalculator;
@@ -14,7 +14,7 @@ import java.awt.image.BufferedImage;
 import java.io.*;
 import java.security.InvalidKeyException;
 
-public class HiderModel {
+public class HiderViewModel {
 
     private Image placeholderImage;
 
@@ -26,7 +26,7 @@ public class HiderModel {
 
     private ObjectProperty<Image> outputImageProperty;
 
-    public HiderModel(Image placeholderImage) {
+    public HiderViewModel(Image placeholderImage) {
         this.placeholderImage = placeholderImage;
         inputImageProperty = new SimpleObjectProperty<>(placeholderImage);
         inputFileProperty = new SimpleObjectProperty<>();

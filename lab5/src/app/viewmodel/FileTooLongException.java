@@ -1,4 +1,4 @@
-package app.model;
+package app.viewmodel;
 
 public class FileTooLongException extends Exception {
 

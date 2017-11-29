@@ -2,10 +2,10 @@ package app.controller;
 
 import app.helper.AlertHelper;
 import app.helper.FileDialogHelper;
-import app.model.FileTooLongException;
-import app.model.HiderModel;
-import app.model.ImageTooSmallException;
-import app.model.StringImageMaxInputFileSize;
+import app.viewmodel.FileTooLongException;
+import app.viewmodel.HiderViewModel;
+import app.viewmodel.ImageTooSmallException;
+import app.viewmodel.StringImageMaxInputFileSize;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -22,7 +22,7 @@ import java.util.ResourceBundle;
 
 public class HiderController implements Initializable {
 
-    private HiderModel hiderModel;
+    private HiderViewModel hiderViewModel;
 
     @FXML
     private ImageView sourceImageView, resultImageView;
@@ -41,7 +41,7 @@ public class HiderController implements Initializable {
         File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilters.PNG);
         if (inputImageFile != null) {
             try (InputStream inputFileStream = new FileInputStream(inputImageFile)) {
-                hiderModel.setInputImage(new Image(inputFileStream));
+                hiderViewModel.setInputImage(new Image(inputFileStream));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -51,13 +51,13 @@ public class HiderController implements Initializable {
     @FXML
     private void onOpenInputFileAction(ActionEvent event) {
         File inputFile = FileDialogHelper.chooseFile("Open Input File", FileDialogHelper.ExtensionFilters.ANY);
-        hiderModel.setInputFile(inputFile);
+        hiderViewModel.setInputFile(inputFile);
     }
 
     @FXML
     private void onEncryptAction(ActionEvent event) {
         try {
-            hiderModel.hideData();
+            hiderViewModel.hideData();
         } catch (FileTooLongException | ImageTooSmallException e) {
             AlertHelper.alert(Alert.AlertType.WARNING, "Warning", null, e.getMessage());
         } catch (FileNotFoundException e) {
@@ -68,45 +68,45 @@ public class HiderController implements Initializable {
     @FXML
     private void onSaveAsAction(ActionEvent event) {
         File inputFile = FileDialogHelper.saveFile("Save result image", "result.png");
-        hiderModel.saveOutputImage(inputFile);
+        hiderViewModel.saveOutputImage(inputFile);
     }
 
     @FXML
     private void onResetAction(ActionEvent event) {
-        hiderModel.reset();
+        hiderViewModel.reset();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try (InputStream is = getClass().getResourceAsStream("/images/placeholder.png")) {
-            hiderModel = new HiderModel(new Image(is));
+            hiderViewModel = new HiderViewModel(new Image(is));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        maxFileSizeLabel.visibleProperty().bind(hiderModel.inputImageProperty().isNotEqualTo(hiderModel.getPlaceholderImage()));
-        maxFileSizeLabel.textProperty().bindBidirectional(hiderModel.inputImageProperty(), new StringImageMaxInputFileSize());
+        maxFileSizeLabel.visibleProperty().bind(hiderViewModel.inputImageProperty().isNotEqualTo(hiderViewModel.getPlaceholderImage()));
+        maxFileSizeLabel.textProperty().bindBidirectional(hiderViewModel.inputImageProperty(), new StringImageMaxInputFileSize());
 
         inputFilePathLabel.visibleProperty().bind(inputFilePathLabel.textProperty().isNotEmpty());
 
-        inputFilePathLabel.textProperty().bind(hiderModel.inputFileProperty().asString());
-        inputFilePathLabel.visibleProperty().bind(hiderModel.inputFileProperty().isNotNull());
+        inputFilePathLabel.textProperty().bind(hiderViewModel.inputFileProperty().asString());
+        inputFilePathLabel.visibleProperty().bind(hiderViewModel.inputFileProperty().isNotNull());
 
         encryptButton.disableProperty().bind(
-                hiderModel.inputFileProperty().isNull()
-                        .or(hiderModel.passwordProperty().isEmpty())
-                        .or(hiderModel.inputImageProperty().isNull())
-                        .or(hiderModel.inputImageProperty().isEqualTo(hiderModel.getPlaceholderImage()))
+                hiderViewModel.inputFileProperty().isNull()
+                        .or(hiderViewModel.passwordProperty().isEmpty())
+                        .or(hiderViewModel.inputImageProperty().isNull())
+                        .or(hiderViewModel.inputImageProperty().isEqualTo(hiderViewModel.getPlaceholderImage()))
         );
 
         saveResultImageButton.disableProperty().bind(
-                hiderModel.outputImageProperty().isEqualTo(hiderModel.getPlaceholderImage())
+                hiderViewModel.outputImageProperty().isEqualTo(hiderViewModel.getPlaceholderImage())
         );
 
-        hiderModel.inputImageProperty().bindBidirectional(sourceImageView.imageProperty());
-        hiderModel.passwordProperty().bindBidirectional(passwordField.textProperty());
-        hiderModel.outputImageProperty().bindBidirectional(resultImageView.imageProperty());
+        hiderViewModel.inputImageProperty().bindBidirectional(sourceImageView.imageProperty());
+        hiderViewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
+        hiderViewModel.outputImageProperty().bindBidirectional(resultImageView.imageProperty());
 
-        hiderModel.reset();
+        hiderViewModel.reset();
     }
 }

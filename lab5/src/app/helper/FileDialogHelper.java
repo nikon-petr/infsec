@@ -19,7 +19,7 @@ public class FileDialogHelper {
     static {
         extensionFilters = new HashMap<>();
         extensionFilters.put(ExtensionFilters.XML, new FileChooser.ExtensionFilter("Xml Files (*.xml)", "*.xml"));
-        extensionFilters.put(ExtensionFilters.PNG, new FileChooser.ExtensionFilter("Bmp Image Files (*.png)", "*.png"));
+        extensionFilters.put(ExtensionFilters.PNG, new FileChooser.ExtensionFilter("Png Image Files (*.png)", "*.png"));
         extensionFilters.put(ExtensionFilters.TXT, new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"));
         extensionFilters.put(ExtensionFilters.WORD, new FileChooser.ExtensionFilter("Word Files (*.doc, *.docx)", "*.doc", "*.docx"));
         extensionFilters.put(ExtensionFilters.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*"));

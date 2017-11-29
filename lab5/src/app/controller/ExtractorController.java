@@ -1,7 +1,7 @@
 package app.controller;
 
 import app.helper.FileDialogHelper;
-import app.model.ExtractorModel;
+import app.viewmodel.ExtractorViewModel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 
 public class ExtractorController implements Initializable {
 
-    private ExtractorModel extractorModel;
+    private ExtractorViewModel extractorViewModel;
 
     @FXML
     private ImageView inputImageView;
@@ -35,7 +35,7 @@ public class ExtractorController implements Initializable {
         File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilters.PNG);
         if (inputImageFile != null) {
             try (InputStream inputFileStream = new FileInputStream(inputImageFile)) {
-                extractorModel.setInputImage(new Image(inputFileStream));
+                extractorViewModel.setInputImage(new Image(inputFileStream));
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -49,26 +49,26 @@ public class ExtractorController implements Initializable {
 
     @FXML
     private void onResetAction(ActionEvent event) {
-        extractorModel.reset();
+        extractorViewModel.reset();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         try (InputStream is = getClass().getResourceAsStream("/images/placeholder.png")) {
-            extractorModel = new ExtractorModel(new Image(is));
+            extractorViewModel = new ExtractorViewModel(new Image(is));
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         extractButton.disableProperty().bind(
-                extractorModel.passwordProperty().isEmpty()
-                        .or(extractorModel.inputImageProperty().isNull())
-                        .or(extractorModel.inputImageProperty().isEqualTo(extractorModel.getPlaceholderImage()))
+                extractorViewModel.passwordProperty().isEmpty()
+                        .or(extractorViewModel.inputImageProperty().isNull())
+                        .or(extractorViewModel.inputImageProperty().isEqualTo(extractorViewModel.getPlaceholderImage()))
         );
 
-        extractorModel.inputImageProperty().bindBidirectional(inputImageView.imageProperty());
-        extractorModel.passwordProperty().bindBidirectional(passwordField.textProperty());
+        extractorViewModel.inputImageProperty().bindBidirectional(inputImageView.imageProperty());
+        extractorViewModel.passwordProperty().bindBidirectional(passwordField.textProperty());
 
-        extractorModel.reset();
+        extractorViewModel.reset();
     }
 }

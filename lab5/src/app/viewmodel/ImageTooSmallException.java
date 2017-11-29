@@ -1,4 +1,4 @@
-package app.model;
+package app.viewmodel;
 
 public class ImageTooSmallException extends Exception {
 
