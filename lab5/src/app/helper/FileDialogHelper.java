@@ -25,7 +25,7 @@ public class FileDialogHelper {
         extensionFilters.put(ExtensionFilters.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*"));
     }
 
-    public static File chooseFile(Window ownerWindow, String dialogTitle, File initialDirectory, FileChooser.ExtensionFilter... extensionFilters){
+    public static File chooseFile(Window ownerWindow, String dialogTitle, File initialDirectory, FileChooser.ExtensionFilter... extensionFilters) {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.setTitle(dialogTitle);
@@ -36,22 +36,22 @@ public class FileDialogHelper {
         return fileChooser.showOpenDialog(ownerWindow);
     }
 
-    public static File chooseFile(Window ownerWindow, String dialogTitle, FileChooser.ExtensionFilter... extensionFilters){
+    public static File chooseFile(Window ownerWindow, String dialogTitle, FileChooser.ExtensionFilter... extensionFilters) {
         File homeDirectory = new File(System.getProperty("user.home"));
         return chooseFile(ownerWindow, dialogTitle, homeDirectory, extensionFilters);
     }
 
-    public static File chooseFile(String dialogTitle, FileChooser.ExtensionFilter... extensionFilters){
+    public static File chooseFile(String dialogTitle, FileChooser.ExtensionFilter... extensionFilters) {
         File homeDirectory = new File(System.getProperty("user.home"));
         return chooseFile(null, dialogTitle, homeDirectory, extensionFilters);
     }
 
-    public static File chooseFile(String dialogTitle, ExtensionFilters extensionFilter){
+    public static File chooseFile(String dialogTitle, ExtensionFilters extensionFilter) {
         File homeDirectory = new File(System.getProperty("user.home"));
         return chooseFile(null, dialogTitle, homeDirectory, FileDialogHelper.extensionFilters.get(extensionFilter));
     }
 
-    public static File chooseDirectory(Window ownerWindow, String dialogTitle, File initialDirectory){
+    public static File chooseDirectory(Window ownerWindow, String dialogTitle, File initialDirectory) {
         DirectoryChooser directoryChooser = new DirectoryChooser();
 
         directoryChooser.setTitle(dialogTitle);
@@ -60,17 +60,17 @@ public class FileDialogHelper {
         return directoryChooser.showDialog(ownerWindow);
     }
 
-    public static File chooseDirectory(Window ownerWindow, String dialogTitle){
+    public static File chooseDirectory(Window ownerWindow, String dialogTitle) {
         File userDirectory = new File(System.getProperty("user.home"));
         return chooseDirectory(ownerWindow, dialogTitle, userDirectory);
     }
 
-    public static File chooseDirectory(String dialogTitle){
+    public static File chooseDirectory(String dialogTitle) {
         File userDirectory = new File(System.getProperty("user.home"));
         return chooseDirectory(null, dialogTitle, userDirectory);
     }
 
-    public static File saveFile(Window ownerWindow, String dialogTitle, String defaultFileName){
+    public static File saveFile(Window ownerWindow, String dialogTitle, String defaultFileName) {
         FileChooser fileChooser = new javafx.stage.FileChooser();
         fileChooser.setInitialFileName(defaultFileName);
         fileChooser.setTitle(dialogTitle);
@@ -78,7 +78,7 @@ public class FileDialogHelper {
         return fileChooser.showSaveDialog(ownerWindow);
     }
 
-    public static File saveFile(String dialogTitle, String defaultFileName){
+    public static File saveFile(String dialogTitle, String defaultFileName) {
         return saveFile(null, dialogTitle, defaultFileName);
     }
 }

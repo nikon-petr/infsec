@@ -19,7 +19,7 @@ public class ExtractorModel {
         passwordProperty = new SimpleStringProperty();
     }
 
-    public void reset(){
+    public void reset() {
         inputImageProperty.set(placeholderImage);
         passwordProperty.set(null);
     }

@@ -76,10 +76,6 @@ public class HiderModel {
         outputImageProperty.set(placeholderImage);
     }
 
-    public int getMaxFileSize() {
-        return (int) (getInputImage().getWidth() * getInputImage().getHeight()) / 4;
-    }
-
     public Image getPlaceholderImage() {
         return placeholderImage;
     }

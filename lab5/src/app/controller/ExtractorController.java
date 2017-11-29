@@ -6,7 +6,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -26,13 +25,10 @@ public class ExtractorController implements Initializable {
     private ImageView inputImageView;
 
     @FXML
-    private Button openImageButton, revealButton, resetButton;
+    private Button openImageButton, extractButton, resetButton;
 
     @FXML
     private PasswordField passwordField;
-
-    @FXML
-    private Label messageLabel;
 
     @FXML
     private void onOpenImageAction(ActionEvent event) {
@@ -47,7 +43,7 @@ public class ExtractorController implements Initializable {
     }
 
     @FXML
-    private void onRevealAction(ActionEvent event) {
+    private void onExtractAsAction(ActionEvent event) {
 
     }
 
@@ -64,7 +60,7 @@ public class ExtractorController implements Initializable {
             e.printStackTrace();
         }
 
-        revealButton.disableProperty().bind(
+        extractButton.disableProperty().bind(
                 extractorModel.passwordProperty().isEmpty()
                         .or(extractorModel.inputImageProperty().isNull())
                         .or(extractorModel.inputImageProperty().isEqualTo(extractorModel.getPlaceholderImage()))
