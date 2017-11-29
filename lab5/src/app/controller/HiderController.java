@@ -4,7 +4,7 @@ import app.helper.AlertHelper;
 import app.helper.FileDialogHelper;
 import app.model.FileTooLongException;
 import app.model.HiderModel;
-import app.model.ImageTooSmall;
+import app.model.ImageTooSmallException;
 import app.model.StringImageMaxInputFileSize;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,7 +38,7 @@ public class HiderController implements Initializable {
 
     @FXML
     private void onOpenImageAction(ActionEvent event) {
-        File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilters.BMP);
+        File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilters.PNG);
         if (inputImageFile != null) {
             try (InputStream inputFileStream = new FileInputStream(inputImageFile)) {
                 hiderModel.setInputImage(new Image(inputFileStream));
@@ -58,7 +58,7 @@ public class HiderController implements Initializable {
     private void onEncryptAction(ActionEvent event) {
         try {
             hiderModel.hideData();
-        } catch (FileTooLongException | ImageTooSmall e) {
+        } catch (FileTooLongException | ImageTooSmallException e) {
             AlertHelper.alert(Alert.AlertType.WARNING, "Warning", null, e.getMessage());
         } catch (FileNotFoundException e) {
             AlertHelper.alert(Alert.AlertType.ERROR, "Error", null, "File not found");

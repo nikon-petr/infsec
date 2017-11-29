@@ -1,9 +1,9 @@
 package app.model;
 
-public class ImageTooSmall extends Exception {
-    public ImageTooSmall() {}
+public class ImageTooSmallException extends Exception {
+    public ImageTooSmallException() {}
 
-    public ImageTooSmall(String message){
+    public ImageTooSmallException(String message){
         super(message);
     }
 }

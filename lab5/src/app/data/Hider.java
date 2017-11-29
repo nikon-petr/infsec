@@ -2,6 +2,8 @@ package app.data;
 
 import javafx.scene.image.*;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -14,8 +16,12 @@ public class Hider {
 
         WritableImage result = new WritableImage(width, height);
 
+
+
         PixelReader pixelReader = inputImage.getPixelReader();
         PixelWriter pixelWriter = result.getPixelWriter();
+
+        System.out.println(pixelReader.getPixelFormat().getType());
 
         byte[] pixels = new byte[width * height * 4];
         pixelReader.getPixels(0, 0, width, height, PixelFormat.getByteBgraInstance(), pixels, 0, width * 4);

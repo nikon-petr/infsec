@@ -34,7 +34,7 @@ public class HiderModel {
         outputImageProperty = new SimpleObjectProperty<>(placeholderImage);
     }
 
-    public void hideData() throws FileTooLongException, ImageTooSmall, FileNotFoundException {
+    public void hideData() throws FileTooLongException, ImageTooSmallException, FileNotFoundException {
         int maxDataSize = (int) (getInputImage().getWidth() * getInputImage().getHeight()) / 4;
         long dataSize = getInputFile().length();
 
@@ -44,7 +44,7 @@ public class HiderModel {
 
 
         if (maxDataSize < dataSize) {
-            throw new ImageTooSmall("The image is too small for hide the data");
+            throw new ImageTooSmallException("The image is too small for hide the data");
         }
 
         try (InputStream inputStream = new FileInputStream(getInputFile())) {

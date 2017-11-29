@@ -4,16 +4,14 @@ import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
-import javax.xml.transform.stream.StreamSource;
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class FileDialogHelper {
 
     public enum ExtensionFilters {
-        XML, BMP, TXT, WORD, ANY
+        XML, PNG, TXT, WORD, ANY
     }
 
     private static final Map<ExtensionFilters, FileChooser.ExtensionFilter> extensionFilters;
@@ -21,7 +19,7 @@ public class FileDialogHelper {
     static {
         extensionFilters = new HashMap<>();
         extensionFilters.put(ExtensionFilters.XML, new FileChooser.ExtensionFilter("Xml Files (*.xml)", "*.xml"));
-        extensionFilters.put(ExtensionFilters.BMP, new FileChooser.ExtensionFilter("Bmp Image Files (*.png)", "*.png"));
+        extensionFilters.put(ExtensionFilters.PNG, new FileChooser.ExtensionFilter("Bmp Image Files (*.png)", "*.png"));
         extensionFilters.put(ExtensionFilters.TXT, new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"));
         extensionFilters.put(ExtensionFilters.WORD, new FileChooser.ExtensionFilter("Word Files (*.doc, *.docx)", "*.doc", "*.docx"));
         extensionFilters.put(ExtensionFilters.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*"));
