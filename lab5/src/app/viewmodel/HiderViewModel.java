@@ -1,6 +1,6 @@
 package app.viewmodel;
 
-import app.data.Encryptor;
+import app.data.Crypter;
 import app.data.HashCalculator;
 import app.data.Hider;
 import javafx.beans.property.ObjectProperty;
@@ -50,7 +50,7 @@ public class HiderViewModel {
         try (InputStream inputStream = new FileInputStream(getInputFile())) {
 
             byte[] passwordHash = HashCalculator.calculateHash(getPassword());
-            InputStream encodedStream = Encryptor.encrypt(inputStream, passwordHash);
+            InputStream encodedStream = Crypter.encrypt(inputStream, passwordHash);
             Image outputImage = Hider.hideData(getInputImage(), encodedStream);
 
             setOutputImage(outputImage);
