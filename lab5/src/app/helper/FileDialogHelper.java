@@ -22,7 +22,7 @@ public class FileDialogHelper {
         extensionFilters.put(ExtensionFilters.PNG, new FileChooser.ExtensionFilter("Png Image Files (*.png)", "*.png"));
         extensionFilters.put(ExtensionFilters.TXT, new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"));
         extensionFilters.put(ExtensionFilters.WORD, new FileChooser.ExtensionFilter("Word Files (*.doc, *.docx)", "*.doc", "*.docx"));
-        extensionFilters.put(ExtensionFilters.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*"));
+        extensionFilters.put(ExtensionFilters.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*", "*.*"));
     }
 
     public static File chooseFile(Window ownerWindow, String dialogTitle, File initialDirectory, FileChooser.ExtensionFilter... extensionFilters) {

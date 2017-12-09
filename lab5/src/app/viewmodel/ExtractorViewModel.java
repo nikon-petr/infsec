@@ -1,9 +1,15 @@
 package app.viewmodel;
 
+import app.data.Crypter;
+import app.data.Extractor;
+import app.data.HashCalculator;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
+
+import java.io.OutputStream;
+import java.security.InvalidKeyException;
 
 public class ExtractorViewModel {
 
@@ -17,6 +23,16 @@ public class ExtractorViewModel {
         this.placeholderImage = placeholderImage;
         inputImageProperty = new SimpleObjectProperty<>();
         passwordProperty = new SimpleStringProperty();
+    }
+
+    public void extractFile(OutputStream outputStream){
+        try {
+            byte[] passwordHash = HashCalculator.calculateHash(getPassword());
+            OutputStream decryptedStream = Crypter.decrypt(outputStream, passwordHash);
+            Extractor.extract(getInputImage(), decryptedStream);
+        } catch (InvalidKeyException e) {
+            e.printStackTrace();
+        }
     }
 
     public void reset() {

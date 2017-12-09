@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<GridPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.RootController">
+<GridPane maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.RootController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -125,7 +125,7 @@
                   </HBox>
                   <HBox prefWidth="200.0" spacing="10.0" VBox.vgrow="NEVER">
                      <children>
-                        <Button fx:id="signFileButton" mnemonicParsing="false" onAction="#onEncryptAction" text="Encrypt" />
+                        <Button fx:id="encryptButton" mnemonicParsing="false" onAction="#onEncryptAction" text="Encrypt" />
                         <Button fx:id="decryptButton" mnemonicParsing="false" onAction="#onDecryptAction" text="Decrypt" />
                         <Button fx:id="resetButton" mnemonicParsing="false" onAction="#onResetAction" text="Reset" />
                      </children>

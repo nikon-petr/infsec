@@ -1,6 +1,7 @@
 package app.data;
 
 import javax.xml.bind.DatatypeConverter;
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -11,9 +12,9 @@ public class HashCalculator {
 
         try {
             MessageDigest messageDigest = MessageDigest.getInstance("MD5");
-            messageDigest.update(inputString.getBytes());
+            messageDigest.update(inputString.getBytes("UTF-8"));
             hashBytes = messageDigest.digest();
-        } catch (NoSuchAlgorithmException e) {
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 

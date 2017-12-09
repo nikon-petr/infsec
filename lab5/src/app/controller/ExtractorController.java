@@ -10,10 +10,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -44,7 +41,14 @@ public class ExtractorController implements Initializable {
 
     @FXML
     private void onExtractAsAction(ActionEvent event) {
-
+        File outputFile = FileDialogHelper.saveFile("Extract as", "extracted");
+        if (outputFile != null){
+            try(OutputStream fileOutputStream = new FileOutputStream(outputFile)){
+                extractorViewModel.extractFile(fileOutputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML

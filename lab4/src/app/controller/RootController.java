@@ -104,7 +104,6 @@ public class RootController implements Initializable {
         } catch (SAXException | InvalidKeySpecException e1) {
             importPrivateKeySuccessLabel.setVisible(false);
             importPrivateKeyFailLabel.setVisible(true);
-            e1.printStackTrace();
         }
     }
 
@@ -123,7 +122,6 @@ public class RootController implements Initializable {
         } catch (SAXException | InvalidKeySpecException e1) {
             importPublicKeySuccessLabel.setVisible(false);
             importPublicKeyFailLabel.setVisible(true);
-            e1.printStackTrace();
         }
     }
 
@@ -139,7 +137,7 @@ public class RootController implements Initializable {
 
     @FXML
     private void onOpenFileAction(ActionEvent e) {
-        FileChooser fileChooser = helper.file.FileChooser.get("Open Target File", "All Types (*)", "*");
+        FileChooser fileChooser = helper.file.FileChooser.get("Open Target File", "All Types (*)", "*.*");
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {
@@ -151,7 +149,7 @@ public class RootController implements Initializable {
 
     @FXML
     private void onLoadSignAction(ActionEvent e) {
-        FileChooser fileChooser = helper.file.FileChooser.get("Open Signature File", "All Types (*)", "*");
+        FileChooser fileChooser = helper.file.FileChooser.get("Open Signature File", "All Types (*)", "*.*");
         File selectedFile = fileChooser.showOpenDialog(null);
 
         if (selectedFile != null) {

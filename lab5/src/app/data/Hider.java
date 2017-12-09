@@ -4,7 +4,6 @@ import javafx.scene.image.*;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.ByteBuffer;
 
 public class Hider {
 
@@ -14,35 +13,32 @@ public class Hider {
 
         WritableImage result = new WritableImage(width, height);
 
-
         PixelReader pixelReader = inputImage.getPixelReader();
         PixelWriter pixelWriter = result.getPixelWriter();
 
-        System.out.println(pixelReader.getPixelFormat().getType());
+        int[] pixels = new int[width * height];
+        pixelReader.getPixels(0, 0, width, height, PixelFormat.getIntArgbInstance(), pixels, 0, width);
 
-        byte[] pixels = new byte[width * height * 4];
-        pixelReader.getPixels(0, 0, width, height, PixelFormat.getByteBgraInstance(), pixels, 0, width * 4);
+        try(SteganographyOutputStream steganographyOutputStream = new SteganographyOutputStream(pixels)){
 
-        try {
-            int offset = 4;
-            byte[] buffer = new byte[2048];
+            int data = inputStream.read();
+            int i = 0;
+            while (data != -1){
+                steganographyOutputStream.write(data);
+                data = inputStream.read();
 
-            while (inputStream.read(buffer) != -1) {
-                for (int i = 0; i < 2048; i++, offset += 4) {
-                    pixels[offset] = (byte) ((pixels[offset] & 0b11111000) + ((buffer[i] & 0b11100000) >>> 5));
-                    pixels[offset + 1] = (byte) ((pixels[offset + 1] & 0b11111000) + ((buffer[i] & 0b00011100) >>> 2));
-                    pixels[offset + 2] = (byte) ((pixels[offset + 2] & 0b11111100) + ((buffer[i] & 0b00000011)));
-                }
+                // System.out.println(i);
+                i++;
             }
 
-            byte[] length = ByteBuffer.allocate(4).putInt(offset).array();
-            System.arraycopy(length, 0, pixels, 0, 4);
+            int[] mpixels = steganographyOutputStream.toIntArray();
+            System.out.println(~mpixels[0]);
+
+            pixelWriter.setPixels(0, 0, width, height, PixelFormat.getIntArgbInstance(), mpixels, 0, width);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        pixelWriter.setPixels(0, 0, width, height, PixelFormat.getByteBgraInstance(), pixels, 0, width * 4);
 
         return result;
     }

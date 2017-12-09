@@ -42,7 +42,6 @@ public class HiderViewModel {
             throw new FileTooLongException("The file is too long");
         }
 
-
         if (maxDataSize < dataSize) {
             throw new ImageTooSmallException("The image is too small for hide the data");
         }
