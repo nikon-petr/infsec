@@ -5,7 +5,7 @@ import app.helper.FileDialogHelper;
 import app.viewmodel.FileTooLongException;
 import app.viewmodel.HiderViewModel;
 import app.viewmodel.ImageTooSmallException;
-import app.viewmodel.StringImageMaxInputFileSize;
+import app.helper.StringImageMaxInputFileSize;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

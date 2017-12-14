@@ -42,7 +42,7 @@ public class Crypter {
         Key secretKeySpec = new SecretKeySpec(Arrays.copyOf(key, 16), "AES");
 
         try {
-            cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+            cipher = Cipher.getInstance("AES/ECB/NoPadding");
         } catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
             e.printStackTrace();
         }
