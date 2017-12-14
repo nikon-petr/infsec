@@ -19,15 +19,11 @@ public class Extractor {
 
         SteganographyInputStream steganographyInputStream = new SteganographyInputStream(pixels);
 
-        int i = 0;
         try {
             int data = steganographyInputStream.read();
-            while (data != -1){
+            while (data != -1) {
                 dataStream.write(data);
                 data = steganographyInputStream.read();
-
-                // System.out.println(i);
-                i++;
             }
         } catch (IOException e) {
             e.printStackTrace();

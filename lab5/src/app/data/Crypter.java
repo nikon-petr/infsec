@@ -14,11 +14,11 @@ import java.util.Arrays;
 
 public class Crypter {
 
-    public static CipherInputStream encrypt(InputStream data, byte[] passwordHash) throws InvalidKeyException{
+    public static CipherInputStream encrypt(InputStream data, byte[] passwordHash) throws InvalidKeyException {
         return encryptWithKey(data, passwordHash);
     }
 
-    public static CipherOutputStream decrypt(OutputStream data, byte[] passwordHash) throws InvalidKeyException{
+    public static CipherOutputStream decrypt(OutputStream data, byte[] passwordHash) throws InvalidKeyException {
         return decryptWithKey(data, passwordHash);
     }
 

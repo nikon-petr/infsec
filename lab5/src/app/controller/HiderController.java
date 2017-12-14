@@ -2,10 +2,10 @@ package app.controller;
 
 import app.helper.AlertHelper;
 import app.helper.FileDialogHelper;
+import app.helper.StringImageMaxInputFileSize;
 import app.viewmodel.FileTooLongException;
 import app.viewmodel.HiderViewModel;
 import app.viewmodel.ImageTooSmallException;
-import app.helper.StringImageMaxInputFileSize;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -67,7 +67,11 @@ public class HiderController implements Initializable {
 
     @FXML
     private void onSaveAsAction(ActionEvent event) {
-        File inputFile = FileDialogHelper.saveFile("Save result image", "result.png");
+        File inputFile = FileDialogHelper.saveFile(
+                "Save result image",
+                "result.png",
+                FileDialogHelper.ExtensionFilters.PNG
+        );
         hiderViewModel.saveOutputImage(inputFile);
     }
 

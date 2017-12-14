@@ -8,7 +8,8 @@ public class SteganographyOutputStream extends OutputStream {
     private int[] pixels;
     private int pointer = 1;
 
-    private SteganographyOutputStream() {}
+    private SteganographyOutputStream() {
+    }
 
     public SteganographyOutputStream(int[] pixels) {
         this.pixels = new int[pixels.length];
@@ -23,7 +24,7 @@ public class SteganographyOutputStream extends OutputStream {
         pointer++;
     }
 
-    public int[] toIntArray(){
+    public int[] toIntArray() {
         pixels[0] = ~pointer;
         return pixels;
     }

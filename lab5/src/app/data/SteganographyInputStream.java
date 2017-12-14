@@ -8,7 +8,8 @@ public class SteganographyInputStream extends InputStream {
     private int[] pixels;
     private int pointer = 1;
 
-    private SteganographyInputStream() {}
+    private SteganographyInputStream() {
+    }
 
     public SteganographyInputStream(int[] pixels) {
         this.pixels = pixels;
@@ -16,8 +17,7 @@ public class SteganographyInputStream extends InputStream {
 
     @Override
     public synchronized int read() throws IOException {
-        if (pointer == ~pixels[0]){
-            System.out.println(~pixels[0]);
+        if (pointer == ~pixels[0]) {
             return -1;
         }
 

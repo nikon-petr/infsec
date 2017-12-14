@@ -41,9 +41,17 @@ public class ExtractorController implements Initializable {
 
     @FXML
     private void onExtractAsAction(ActionEvent event) {
-        File outputFile = FileDialogHelper.saveFile("Extract as", "extracted");
-        if (outputFile != null){
-            try(OutputStream fileOutputStream = new FileOutputStream(outputFile)){
+        File outputFile = FileDialogHelper.saveFile(
+                "Extract as",
+                "extracted",
+                FileDialogHelper.ExtensionFilters.TXT,
+                FileDialogHelper.ExtensionFilters.PDF,
+                FileDialogHelper.ExtensionFilters.WORD,
+                FileDialogHelper.ExtensionFilters.ANY
+        );
+
+        if (outputFile != null) {
+            try (OutputStream fileOutputStream = new FileOutputStream(outputFile)) {
                 extractorViewModel.extractFile(fileOutputStream);
             } catch (IOException e) {
                 e.printStackTrace();

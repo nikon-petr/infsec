@@ -25,7 +25,7 @@ public class ExtractorViewModel {
         passwordProperty = new SimpleStringProperty();
     }
 
-    public void extractFile(OutputStream outputStream){
+    public void extractFile(OutputStream outputStream) {
         try {
             byte[] passwordHash = HashCalculator.calculateHash(getPassword());
             OutputStream decryptedStream = Crypter.decrypt(outputStream, passwordHash);
