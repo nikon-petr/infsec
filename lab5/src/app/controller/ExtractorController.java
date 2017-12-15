@@ -29,7 +29,11 @@ public class ExtractorController implements Initializable {
 
     @FXML
     private void onOpenImageAction(ActionEvent event) {
-        File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilter.PNG);
+        File inputImageFile = FileDialogHelper.chooseFile(
+                "Open Input Image",
+                FileDialogHelper.ExtensionFilter.PNG,
+                FileDialogHelper.ExtensionFilter.BMP
+        );
         if (inputImageFile != null) {
             try (InputStream inputFileStream = new FileInputStream(inputImageFile)) {
                 extractorViewModel.setInputImage(new Image(inputFileStream));

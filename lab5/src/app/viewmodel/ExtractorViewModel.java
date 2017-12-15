@@ -9,7 +9,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.image.Image;
 
 import java.io.OutputStream;
-import java.security.InvalidKeyException;
 
 public class ExtractorViewModel {
 
@@ -26,13 +25,9 @@ public class ExtractorViewModel {
     }
 
     public void extractFile(OutputStream outputStream) {
-        try {
-            byte[] passwordHash = HashCalculator.calculateHash(getPassword());
-            OutputStream decryptedStream = Crypter.decrypt(outputStream, passwordHash);
-            Extractor.extract(getInputImage(), decryptedStream);
-        } catch (InvalidKeyException e) {
-            e.printStackTrace();
-        }
+        byte[] passwordHash = HashCalculator.calculateHash(getPassword());
+        OutputStream decryptedStream = Crypter.decrypt(outputStream, passwordHash);
+        Extractor.extract(getInputImage(), decryptedStream);
     }
 
     public void reset() {

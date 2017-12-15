@@ -3,16 +3,14 @@ package app.viewmodel;
 import app.data.Crypter;
 import app.data.HashCalculator;
 import app.data.Hider;
+import app.helper.SaveImageHelper;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
+import javafx.scene.image.PixelFormat;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
 import java.io.*;
-import java.security.InvalidKeyException;
 
 public class HiderViewModel {
 
@@ -54,18 +52,15 @@ public class HiderViewModel {
 
             setOutputImage(outputImage);
 
-        } catch (IOException | InvalidKeyException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void saveOutputImage(File outputFile) {
-        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(getOutputImage(), null);
-        try {
-            ImageIO.write(bufferedImage, "png", outputFile);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        PixelFormat.Type type = getInputImage().getPixelReader().getPixelFormat().getType();
+        boolean isRgb = type == PixelFormat.Type.BYTE_RGB;
+        SaveImageHelper.saveImageToPngFile(getOutputImage(), outputFile, isRgb);
     }
 
     public void reset() {

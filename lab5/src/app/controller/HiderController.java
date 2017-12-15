@@ -38,7 +38,10 @@ public class HiderController implements Initializable {
 
     @FXML
     private void onOpenImageAction(ActionEvent event) {
-        File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilter.PNG);
+        File inputImageFile = FileDialogHelper.chooseFile(
+                "Open Input Image",
+                FileDialogHelper.ExtensionFilter.PNG,
+                FileDialogHelper.ExtensionFilter.BMP);
         if (inputImageFile != null) {
             try (InputStream inputFileStream = new FileInputStream(inputImageFile)) {
                 hiderViewModel.setInputImage(new Image(inputFileStream));
@@ -67,7 +70,12 @@ public class HiderController implements Initializable {
 
     @FXML
     private void onSaveAsAction(ActionEvent event) {
-        File inputFile = FileDialogHelper.saveFile("Save result image", "result.png", FileDialogHelper.ExtensionFilter.PNG);
+        File inputFile = FileDialogHelper.saveFile(
+                "Save result image",
+                "result.png",
+                FileDialogHelper.ExtensionFilter.PNG,
+                FileDialogHelper.ExtensionFilter.BMP
+        );
         hiderViewModel.saveOutputImage(inputFile);
     }
 
