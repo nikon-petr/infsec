@@ -5,7 +5,9 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class HashCalculator {
+public final class HashCalculator {
+
+    private HashCalculator() {}
 
     public static byte[] calculateHash(String inputString) {
         byte[] hashBytes = null;

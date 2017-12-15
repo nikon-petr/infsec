@@ -9,7 +9,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class SaveImageHelper {
+public final class SaveImageHelper {
+
+    private SaveImageHelper() {}
+
     public static void saveImageToPngFile(Image image, File file, Boolean isRgb) {
         BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
         try {

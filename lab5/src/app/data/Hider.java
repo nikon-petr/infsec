@@ -5,7 +5,9 @@ import javafx.scene.image.*;
 import java.io.IOException;
 import java.io.InputStream;
 
-public class Hider {
+public final class Hider {
+
+    private Hider() {}
 
     public static Image hideData(Image inputImage, InputStream inputStream) {
         int width = (int) inputImage.getWidth();

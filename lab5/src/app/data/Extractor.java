@@ -7,7 +7,10 @@ import javafx.scene.image.PixelReader;
 import java.io.IOException;
 import java.io.OutputStream;
 
-public class Extractor {
+public final class Extractor {
+
+    private Extractor() {}
+
     public static void extract(Image inputImage, OutputStream dataStream) {
         int width = (int) inputImage.getWidth();
         int height = (int) inputImage.getHeight();

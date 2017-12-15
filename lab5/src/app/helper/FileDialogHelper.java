@@ -5,9 +5,13 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
-public class FileDialogHelper {
+public final class FileDialogHelper {
+
+    private FileDialogHelper() {}
 
     private static final Map<ExtensionFilter, FileChooser.ExtensionFilter> extensionFilters;
 

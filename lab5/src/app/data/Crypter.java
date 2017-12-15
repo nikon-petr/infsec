@@ -12,7 +12,9 @@ import java.security.Key;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-public class Crypter {
+public final class Crypter {
+
+    private Crypter() {}
 
     public static CipherInputStream encrypt(InputStream data, byte[] passwordHash) {
         return encryptWithKey(data, passwordHash);

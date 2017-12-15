@@ -2,7 +2,9 @@ package app.helper;
 
 import javafx.scene.control.Alert;
 
-public class AlertHelper {
+public final class AlertHelper {
+
+    private AlertHelper() {}
 
     public static void alert(Alert.AlertType alertType, String alertTitle, String alertHeader, String alertContent) {
         Alert alert = new Alert(alertType);
