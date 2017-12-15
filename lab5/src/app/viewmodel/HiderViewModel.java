@@ -33,7 +33,7 @@ public class HiderViewModel {
     }
 
     public void hideData() throws FileTooLongException, ImageTooSmallException, FileNotFoundException {
-        int maxDataSize = (int) (getInputImage().getWidth() * getInputImage().getHeight()) / 4;
+        int maxDataSize = (int) (getInputImage().getWidth() * getInputImage().getHeight());
         long dataSize = getInputFile().length();
 
         if (dataSize > 100 * 1024 * 1024) {
