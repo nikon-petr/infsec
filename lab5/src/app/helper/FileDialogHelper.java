@@ -5,48 +5,51 @@ import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
 public class FileDialogHelper {
 
-    public enum ExtensionFilters {
-        XML, PNG, TXT, PDF, WORD, ANY
+    public enum ExtensionFilter {
+        ANY, TXT, XML, PNG, PDF, WORD
     }
 
-    private static final Map<ExtensionFilters, FileChooser.ExtensionFilter> extensionFilters;
+    private static final Map<ExtensionFilter, FileChooser.ExtensionFilter> extensionFilters;
 
     static {
-        extensionFilters = new HashMap<>();
-        extensionFilters.put(ExtensionFilters.XML, new FileChooser.ExtensionFilter("Xml Files (*.xml)", "*.xml"));
-        extensionFilters.put(ExtensionFilters.PNG, new FileChooser.ExtensionFilter("Png Image Files (*.png)", "*.png"));
-        extensionFilters.put(ExtensionFilters.TXT, new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"));
-        extensionFilters.put(ExtensionFilters.PDF, new FileChooser.ExtensionFilter("Print Document Files (*.pdf)", "*.pdf"));
-        extensionFilters.put(ExtensionFilters.WORD, new FileChooser.ExtensionFilter("Word Files (*.doc, *.docx)", "*.doc", "*.docx"));
-        extensionFilters.put(ExtensionFilters.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*", "*.*"));
+        Map<ExtensionFilter, FileChooser.ExtensionFilter> ef = new HashMap<>();
+        ef.put(ExtensionFilter.XML, new FileChooser.ExtensionFilter("Xml Files (*.xml)", "*.xml"));
+        ef.put(ExtensionFilter.PNG, new FileChooser.ExtensionFilter("Png Image Files (*.png)", "*.png"));
+        ef.put(ExtensionFilter.TXT, new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt"));
+        ef.put(ExtensionFilter.PDF, new FileChooser.ExtensionFilter("Print Document Files (*.pdf)", "*.pdf"));
+        ef.put(ExtensionFilter.WORD, new FileChooser.ExtensionFilter("Word Files (*.doc, *.docx)", "*.doc", "*.docx"));
+        ef.put(ExtensionFilter.ANY, new FileChooser.ExtensionFilter("All Files (*)", "*", "*.*"));
+
+        extensionFilters = Collections.unmodifiableMap(ef);
     }
 
-    public static File chooseFile(Window ownerWindow, String dialogTitle, File initialDirectory, ExtensionFilters... extensionFilters) {
+    public static File chooseFile(Window ownerWindow, String dialogTitle, File initialDirectory, ExtensionFilter... extensionFilters) {
         FileChooser fileChooser = new FileChooser();
 
         fileChooser.setTitle(dialogTitle);
         fileChooser.setInitialDirectory(initialDirectory);
 
-        for (ExtensionFilters e : extensionFilters) {
-            if (FileDialogHelper.extensionFilters.get(e) != null) {
-                fileChooser.getExtensionFilters().add(FileDialogHelper.extensionFilters.get(e));
+        for (ExtensionFilter extensionFilter : extensionFilters) {
+            if (FileDialogHelper.extensionFilters.get(extensionFilter) != null) {
+                fileChooser.getExtensionFilters().add(FileDialogHelper.extensionFilters.get(extensionFilter));
             }
         }
 
         return fileChooser.showOpenDialog(ownerWindow);
     }
 
-    public static File chooseFile(Window ownerWindow, String dialogTitle, ExtensionFilters... extensionFilters) {
+    public static File chooseFile(Window ownerWindow, String dialogTitle, ExtensionFilter... extensionFilters) {
         File homeDirectory = new File(System.getProperty("user.home"));
         return chooseFile(ownerWindow, dialogTitle, homeDirectory, extensionFilters);
     }
 
-    public static File chooseFile(String dialogTitle, ExtensionFilters... extensionFilter) {
+    public static File chooseFile(String dialogTitle, ExtensionFilter... extensionFilter) {
         File homeDirectory = new File(System.getProperty("user.home"));
         return chooseFile(null, dialogTitle, homeDirectory, extensionFilter);
     }
@@ -70,21 +73,21 @@ public class FileDialogHelper {
         return chooseDirectory(null, dialogTitle, userDirectory);
     }
 
-    public static File saveFile(Window ownerWindow, String dialogTitle, String defaultFileName, ExtensionFilters... extensionFilters) {
+    public static File saveFile(Window ownerWindow, String dialogTitle, String defaultFileName, ExtensionFilter... extensionFilters) {
         FileChooser fileChooser = new javafx.stage.FileChooser();
         fileChooser.setInitialFileName(defaultFileName);
         fileChooser.setTitle(dialogTitle);
 
-        for (ExtensionFilters e : extensionFilters) {
-            if (FileDialogHelper.extensionFilters.get(e) != null) {
-                fileChooser.getExtensionFilters().add(FileDialogHelper.extensionFilters.get(e));
+        for (ExtensionFilter extensionFilter : extensionFilters) {
+            if (FileDialogHelper.extensionFilters.get(extensionFilter) != null) {
+                fileChooser.getExtensionFilters().add(FileDialogHelper.extensionFilters.get(extensionFilter));
             }
         }
 
         return fileChooser.showSaveDialog(ownerWindow);
     }
 
-    public static File saveFile(String dialogTitle, String defaultFileName, ExtensionFilters... extensionFilters) {
+    public static File saveFile(String dialogTitle, String defaultFileName, ExtensionFilter... extensionFilters) {
         return saveFile(null, dialogTitle, defaultFileName, extensionFilters);
     }
 }

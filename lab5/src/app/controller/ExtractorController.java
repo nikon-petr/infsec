@@ -29,7 +29,7 @@ public class ExtractorController implements Initializable {
 
     @FXML
     private void onOpenImageAction(ActionEvent event) {
-        File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilters.PNG);
+        File inputImageFile = FileDialogHelper.chooseFile("Open Input Image", FileDialogHelper.ExtensionFilter.PNG);
         if (inputImageFile != null) {
             try (InputStream inputFileStream = new FileInputStream(inputImageFile)) {
                 extractorViewModel.setInputImage(new Image(inputFileStream));
@@ -44,10 +44,10 @@ public class ExtractorController implements Initializable {
         File outputFile = FileDialogHelper.saveFile(
                 "Extract as",
                 "extracted",
-                FileDialogHelper.ExtensionFilters.TXT,
-                FileDialogHelper.ExtensionFilters.PDF,
-                FileDialogHelper.ExtensionFilters.WORD,
-                FileDialogHelper.ExtensionFilters.ANY
+                FileDialogHelper.ExtensionFilter.TXT,
+                FileDialogHelper.ExtensionFilter.PDF,
+                FileDialogHelper.ExtensionFilter.WORD,
+                FileDialogHelper.ExtensionFilter.ANY
         );
 
         if (outputFile != null) {
