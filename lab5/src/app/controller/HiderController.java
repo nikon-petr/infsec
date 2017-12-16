@@ -76,7 +76,9 @@ public class HiderController implements Initializable {
                 FileDialogHelper.ExtensionFilter.PNG,
                 FileDialogHelper.ExtensionFilter.BMP
         );
-        hiderViewModel.saveOutputImage(inputFile);
+        if (inputFile != null) {
+            hiderViewModel.saveOutputImage(inputFile);
+        }
     }
 
     @FXML
