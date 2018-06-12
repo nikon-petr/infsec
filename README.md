@@ -7,7 +7,8 @@ Information security educational java project
 
 ## Sections
 
-1. symmetric-key algorithms (DES, DESede, AES, RC2)
-2. asymmetric-key algorithms (RSA)
-3. electronic signature (DSA)
-4. steganography
+1. _missing_
+2. symmetric-key algorithms (DES, DESede, AES, RC2)
+3. asymmetric-key algorithms (RSA)
+4. electronic signature (DSA)
+5. steganography
